@@ -78,26 +78,22 @@ public class WinterFragment extends GameFragment implements FieldWinter.OnContro
             new WinterMovementFinger.OnSideFingerMovementCallback() {
         @Override
         public void onUp() {
-            if (fieldWinter.isWin())
-                    fieldWinter.moveUp();
+            fieldWinter.moveUp();
         }
 
         @Override
         public void onDown() {
-            if (fieldWinter.isWin())
-                fieldWinter.moveDown();
+            fieldWinter.moveDown();
         }
 
         @Override
         public void onRight() {
-            if (fieldWinter.isWin())
-                fieldWinter.moveRight();
+            fieldWinter.moveRight();
         }
 
         @Override
         public void onLeft() {
-            if (fieldWinter.isWin())
-                fieldWinter.moveLeft();
+            fieldWinter.moveLeft();
         }
     };
 

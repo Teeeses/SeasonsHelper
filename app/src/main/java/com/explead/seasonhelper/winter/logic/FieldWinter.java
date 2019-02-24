@@ -27,12 +27,9 @@ public class FieldWinter {
     private WinterCell[][] field;
     private ArrayList<WinterCube> cubes = new ArrayList<>();
 
-    private boolean win;
-
     public FieldWinter(int[][] mass, ArrayList<ContainerCells> cubes) {
         createField(mass);
         addActionCellsOnField(cubes);
-        win = false;
     }
 
     private void createField(int[][] mass) {
@@ -44,6 +41,8 @@ public class FieldWinter {
                     cell.makeWall();
                 } else if(mass[i][j] == EMPTY_CELL) {
                     cell.makeEmpty();
+                } else {
+                    cell.makeArrow(mass[i][j]);
                 }
                 field[i][j] = cell;
             }
@@ -183,7 +182,6 @@ public class FieldWinter {
             }
         }
         if(value) {
-            win = true;
             onControllerListener.onWin();
         }
     }
@@ -206,9 +204,5 @@ public class FieldWinter {
 
     public void setOnControllerListener(OnControllerListener onControllerListener) {
         this.onControllerListener = onControllerListener;
-    }
-
-    public boolean isWin() {
-        return win;
     }
 }

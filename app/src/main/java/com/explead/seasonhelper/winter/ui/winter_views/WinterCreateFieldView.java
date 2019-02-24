@@ -177,6 +177,9 @@ public class WinterCreateFieldView extends RelativeLayout {
                 mass[i][j] = field[i][j].getId();
             }
         }
+        for(WinterArrowView arrowView: arrows) {
+            mass[arrowView.getCell().getX()][arrowView.getCell().getY()] = arrowView.getCell().getId();
+        }
         return mass;
     }
 

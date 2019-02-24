@@ -60,7 +60,7 @@ public class WinterCellView extends CellView implements WinterCell.OnChangePurpo
     }
 
     protected void setBackground() {
-        if(cell.getPurpose() == WinterCell.PurposeCell.EMPTY) {
+        if(cell.getPurpose() == WinterCell.PurposeCell.EMPTY || cell.getPurpose() == WinterCell.PurposeCell.ARROW) {
             boolean value = ((cell.getX() + cell.getY()) % 2) == 0;
             if(value) {
                 setBackground(context.getResources().getColor(R.color.cell_light));

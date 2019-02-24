@@ -6,14 +6,15 @@ import com.explead.seasonhelper.common.logic.Direction;
 public class WinterArrow extends Cell {
 
     private int id;
+    private Direction direction;
 
     public WinterArrow(int x, int y, int id) {
         super(x, y);
         this.id = id;
+        findDirection();
     }
 
-    public Direction getDirection() {
-        Direction direction = null;
+    public void findDirection() {
         switch (id) {
             case 1:
                 direction = Direction.U;
@@ -28,6 +29,9 @@ public class WinterArrow extends Cell {
                 direction = Direction.L;
                 break;
         }
+    }
+
+    public Direction getDirection() {
         return direction;
     }
 
