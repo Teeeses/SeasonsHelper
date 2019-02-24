@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Features</string>
+    <string name="level">Уровень</string>
+    <string name="level_is_close">Уровень закрыт</string>
+    <string name="completed">Пройдено</string>
+    <string name="control">Управление</string>
+    <string name="delete">Удалить</string>
+
+    <string name="winter_help_text">Посмотри-ка, кубики стоят не на своих местах. Давай это исправим!\n\nКубики двигаются парой, передвигай их в нужном направлении.\n\nПоставь их так, что бы серединка соответствовала основному цвету кубика.</string>
+    <string name="summer_help_text">Все просто!\nПопробуй соединить кубики одного цвета между собой.\n\n Для этого зажми и веди выбранный кубик к его паре. </string>
+
+</resources>

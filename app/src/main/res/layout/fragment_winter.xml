@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootGameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/winter_game_background" >
+
+    <com.explead.seasonhelper.winter.ui.WinterGameBar
+        android:id="@+id/gameBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layoutMenu" >
+
+        <com.explead.seasonhelper.winter.ui.winter_views.FieldWinterView
+            android:id="@+id/fieldView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/tvDirections"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="@dimen/standard_text"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/fieldView"
+            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginLeft="@dimen/mini_margin"
+            android:layout_marginRight="@dimen/mini_margin"
+            android:gravity="center_horizontal"
+            android:text="Directions"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

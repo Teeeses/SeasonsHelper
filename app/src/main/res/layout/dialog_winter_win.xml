@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/imageLuminescence"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:alpha="0.4"
+        android:src="@drawable/luminescence_background"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/imageCompleted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_full_red_cube"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="@dimen/more_standard_margin"
+                android:layout_marginRight="@dimen/giant_margin"
+                android:layout_marginLeft="@dimen/giant_margin"
+                android:layout_marginBottom="@dimen/more_standard_margin"/>
+
+            <TextView
+                android:id="@+id/textCompleted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/completed"
+                android:textSize="64sp"
+                android:autoSizeTextType="uniform"
+                android:shadowColor="@color/colorPrimary"
+                android:shadowDx="10"
+                android:shadowDy="10"
+                android:shadowRadius="20"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:rotation="-10"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/giant_margin"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/layout">
+
+            <ImageView
+                android:id="@+id/btnMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_menu"
+                android:adjustViewBounds="true"
+                android:layout_marginRight="@dimen/standard_margin"/>
+
+
+            <ImageView
+                android:id="@+id/btnNextLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_next_level"
+                android:layout_alignTop="@+id/btnMenu"
+                android:layout_alignBottom="@+id/btnMenu"
+                android:adjustViewBounds="true"
+                android:visibility="gone"
+                android:layout_toRightOf="@id/btnMenu"
+                android:layout_marginLeft="@dimen/standard_margin"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
+

@@ -1,0 +1,57 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:padding="@dimen/standard_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/levelLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:id="@+id/ivLevel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="false"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/tvLevel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/big_text"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/starsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/more_standard_margin"
+        android:layout_below="@+id/levelLayout"
+        android:layout_marginTop="@dimen/radius"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivStar_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/empty_start"
+            android:adjustViewBounds="true"
+            android:layout_marginRight="@dimen/radius"/>
+
+        <ImageView
+            android:id="@+id/ivStart_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/empty_start"
+            android:adjustViewBounds="true"
+            android:layout_marginLeft="@dimen/radius"/>
+    </LinearLayout>
+
+</RelativeLayout>

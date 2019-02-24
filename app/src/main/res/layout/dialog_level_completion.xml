@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/standard_margin">
+
+    <Button
+        android:id="@+id/btnMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard_margin"
+        android:background="@color/black"
+        android:textSize="@dimen/standard_text"
+        android:textColor="@color/white"
+        android:text="В меню"/>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard_margin"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:background="@color/black"
+        android:textSize="@dimen/standard_text"
+        android:textColor="@color/white"
+        android:text="Дальше"/>
+
+</LinearLayout>
