@@ -49,7 +49,7 @@ public class WinterLevelFragment extends Fragment implements WinterCreateFieldVi
     private SeekBar seekBarContainers;
 
     private ImageView ivArrow;
-    private int valueDirection = 1;
+    private int valueDirection = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,9 +79,9 @@ public class WinterLevelFragment extends Fragment implements WinterCreateFieldVi
         ivArrow.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                valueDirection = (valueDirection + 1) % 5;
+                valueDirection = (valueDirection + 1) % 4;
                 for(Direction direction: Direction.values()) {
-                    if(direction.getId() == valueDirection) {
+                    if(direction.getId() == valueDirection + 1) {
                         ivArrow.setRotation(direction.getRotation());
                     }
                 }
@@ -256,16 +256,20 @@ public class WinterLevelFragment extends Fragment implements WinterCreateFieldVi
         if(valueCell == ValueCell.EMPTY) {
             cell.getCell().changePurpose(WinterCell.PurposeCell.EMPTY);
             winterCreateFieldView.deleteOnThisCell(cell.getCell().getX(), cell.getCell().getY());
+            winterCreateFieldView.deleteArrow(cell.getCell().getX(), cell.getCell().getY());
         } else if(valueCell == ValueCell.WALL) {
             cell.getCell().changePurpose(WinterCell.PurposeCell.WALL);
             winterCreateFieldView.deleteOnThisCell(cell.getCell().getX(), cell.getCell().getY());
+            winterCreateFieldView.deleteArrow(cell.getCell().getX(), cell.getCell().getY());
         } else if(valueCell == ValueCell.CUBE) {
             winterCreateFieldView.createCube(cell.getCell().getX(), cell.getCell().getY(), color);
+            winterCreateFieldView.deleteArrow(cell.getCell().getX(), cell.getCell().getY());
         } else if(valueCell == ValueCell.INSIDE_CUBE) {
             winterCreateFieldView.createInsideCube(cell.getCell().getX(), cell.getCell().getY(), color);
+            winterCreateFieldView.deleteArrow(cell.getCell().getX(), cell.getCell().getY());
         } else if(valueCell == ValueCell.ARROW) {
             if(cell.getCell().getPurpose() == WinterCell.PurposeCell.EMPTY) {
-
+                winterCreateFieldView.createArrow(cell.getCell().getX(), cell.getCell().getY(), valueDirection + 1);
             }
         }
     }

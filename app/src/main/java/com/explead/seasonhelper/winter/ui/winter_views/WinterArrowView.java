@@ -8,11 +8,16 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.explead.seasonhelper.R;
+import com.explead.seasonhelper.common.beans.GetIds;
 import com.explead.seasonhelper.common.logic.Direction;
+import com.explead.seasonhelper.common.ui.CellView;
+import com.explead.seasonhelper.winter.logic.WinterArrow;
+import com.explead.seasonhelper.winter.logic.WinterInsideCube;
 
-public class WinterArrowView extends View {
+public class WinterArrowView extends CellView {
 
     private Context context;
+    private WinterArrow cell;
 
     public WinterArrowView(Context context) {
         super(context);
@@ -35,8 +40,16 @@ public class WinterArrowView extends View {
         setBackgroundDrawable(context.getResources().getDrawable(R.drawable.arrow));
     }
 
-    public void changeRotation(Direction direction) {
-        this.setRotation(direction.getRotation());
+    public void create(float size, WinterArrow cell) {
+        this.size = size;
+        this.cell = cell;
+        this.setLayoutParams(new RelativeLayout.LayoutParams((int)(size + 2f), (int)(size + 2f)));
+        calculateGlobalValue(cell.getX(), cell.getY());
+        this.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.arrow));
+        this.setRotation(cell.getDirection().getRotation());
     }
 
+    public WinterArrow getCell() {
+        return cell;
+    }
 }

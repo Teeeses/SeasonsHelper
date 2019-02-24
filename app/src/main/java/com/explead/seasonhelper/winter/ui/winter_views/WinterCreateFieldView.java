@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import com.explead.seasonhelper.common.app.App;
 import com.explead.seasonhelper.common.logic.Cell;
 import com.explead.seasonhelper.common.logic.ContainerCells;
+import com.explead.seasonhelper.winter.logic.WinterArrow;
 import com.explead.seasonhelper.winter.logic.WinterCell;
 import com.explead.seasonhelper.winter.logic.WinterCube;
 import com.explead.seasonhelper.winter.logic.WinterInsideCube;
@@ -29,6 +30,7 @@ public class WinterCreateFieldView extends RelativeLayout {
     private WinterCell[][] field;
     private ArrayList<CubeView> cubes = new ArrayList<>();
     private ArrayList<InsideCubeView> inside_cubes = new ArrayList<>();
+    private ArrayList<WinterArrowView> arrows = new ArrayList<>();
     private float size;
     private float sizeCell;
 
@@ -107,6 +109,28 @@ public class WinterCreateFieldView extends RelativeLayout {
         insideCubeView.create(sizeCell, winterInsideCube);
         inside_cubes.add(insideCubeView);
         this.addView(insideCubeView);
+    }
+
+    public void deleteArrow(int x, int y) {
+        WinterArrowView arrowView = null;
+        for(WinterArrowView arrow: arrows) {
+            if(arrow.getCell().getX() == x && arrow.getCell().getY() == y) {
+                arrowView = arrow;
+            }
+        }
+        if(arrowView != null) {
+            this.removeView(arrowView);
+            arrows.remove(arrowView);
+        }
+    }
+
+    public void createArrow(int x, int y, int id) {
+        deleteArrow(x, y);
+        WinterArrowView winterArrowView = new WinterArrowView(context);
+        WinterArrow arrow = new WinterArrow(x, y, id);
+        winterArrowView.create(sizeCell, arrow);
+        arrows.add(winterArrowView);
+        this.addView(winterArrowView);
     }
 
     private CubeView getCubeViewFromArray(Cell.ColorCube color) {
