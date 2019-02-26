@@ -1,7 +1,5 @@
 package com.explead.seasonhelper.winter.logic;
 
-import android.util.Log;
-
 import com.explead.seasonhelper.common.logic.Cell;
 import com.explead.seasonhelper.common.logic.ContainerCells;
 import com.explead.seasonhelper.common.logic.Direction;
@@ -66,114 +64,179 @@ public class FieldWinter {
         }
     }
 
+    public void move(Direction direction) {
+        sort(direction);
+        setDirectionsMoveCubes(direction);
+        while(!isEndMove()) {
 
-    public void moveRight() {
-        Collections.sort(cubes, WinterComparators.RIGHT);
-        for(int i = 0; i < cubes.size(); i++) {
-            WinterCube cube = cubes.get(i);
-            int x = cube.getX();
-            int y = cube.getY();
-            loop:
-            while (field[x][y].getPurpose() == WinterCell.PurposeCell.EMPTY && y < field.length - 1) {
-                y++;
-                if (field[x][y].getPurpose() == WinterCell.PurposeCell.WALL) {
-                    y--;
-                    break;
-                } else {
-                    for (int k = i - 1; k >= 0; k--) {
-                        if (cubes.get(k).isCoordinate(x, y)) {
-                            y--;
-                            break loop;
-                        }
+            for(int i = 0; i < cubes.size(); i++) {
+                WinterCube cube = cubes.get(i);
+                Direction cubeDirection = cube.getDirection();
+                if(cubeDirection != null) {
+                    if (cubeDirection == Direction.U) {
+                        moveU(cube);
+                    }
+                    if (cubeDirection == Direction.R) {
+                        moveR(cube);
+                    }
+                    if (cubeDirection == Direction.D) {
+                        moveD(cube);
+                    }
+                    if (cubeDirection == Direction.L) {
+                        moveL(cube);
                     }
                 }
             }
-            cube.right(x, y);
         }
+
         checkWin();
     }
 
-    public void moveLeft() {
-        Collections.sort(cubes, WinterComparators.LEFT);
-        for(int i = 0; i < cubes.size(); i++) {
-            WinterCube cube = cubes.get(i);
-            int x = cube.getX();
-            int y = cube.getY();
-            loop:
-            while (field[x][y].getPurpose() == WinterCell.PurposeCell.EMPTY && y > 0) {
-                y--;
-                if (field[x][y].getPurpose() == WinterCell.PurposeCell.WALL) {
-                    y++;
-                    break;
-                } else {
-                    for (int k = i - 1; k >= 0; k--) {
-                        if (cubes.get(k).isCoordinate(x, y)) {
-                            y++;
-                            break loop;
-                        }
-                    }
-                }
+    private void setDirectionsMoveCubes(Direction direction) {
+        for(WinterCube cube: cubes) {
+            cube.setDirection(direction);
+            cube.saveLastInfo();
+        }
+    }
+
+    private boolean isEndMove() {
+        for(WinterCube cube: cubes) {
+            if(cube.getDirection() != null) {
+                return false;
             }
-            cube.left(x, y);
         }
-        checkWin();
+        return true;
     }
 
-    public void moveUp() {
-        Collections.sort(cubes, WinterComparators.UP);
-        for(int i = 0; i < cubes.size(); i++) {
-            WinterCube cube = cubes.get(i);
-            int x = cube.getX();
-            int y = cube.getY();
-            loop:
-            while (field[x][y].getPurpose() == WinterCell.PurposeCell.EMPTY && x > 0) {
-                x--;
-                if (field[x][y].getPurpose() == WinterCell.PurposeCell.WALL) {
-                    x++;
-                    break;
-                } else {
-                    for (int k = i - 1; k >= 0; k--) {
-                        if (cubes.get(k).isCoordinate(x, y)) {
-                            x++;
-                            break loop;
-                        }
-                    }
-                }
+    private void sort(Direction direction) {
+        if(direction == Direction.U) {
+            Collections.sort(cubes, WinterComparators.UP);
+        }
+        if(direction == Direction.R) {
+            Collections.sort(cubes, WinterComparators.RIGHT);
+        }
+        if(direction == Direction.D) {
+            Collections.sort(cubes, WinterComparators.DOWN);
+        }
+        if(direction == Direction.L) {
+            Collections.sort(cubes, WinterComparators.LEFT);
+        }
+    }
+
+    private boolean isCubeOnPlace(int x, int y) {
+        for(WinterCube cube: cubes) {
+            if(cube.getX() == x && cube.getY() == y) {
+                return true;
             }
-            cube.up(x, y);
         }
-        checkWin();
+        return false;
     }
 
-
-    public void moveDown() {
-        Collections.sort(cubes, WinterComparators.DOWN);
-
-        for(int i = 0; i < cubes.size(); i++) {
-            WinterCube cube = cubes.get(i);
-            int x = cube.getX();
+    private void moveU(WinterCube cube) {
+        if(cube.getX() == 0) {
+            cube.move();
+            cube.setDirection(null);
+        } else {
+            int x = cube.getX() - 1;
             int y = cube.getY();
-            loop:
-            while (field[x][y].getPurpose() == WinterCell.PurposeCell.EMPTY && x < field.length - 1) {
-                x++;
-                if (field[x][y].getPurpose() == WinterCell.PurposeCell.WALL) {
-                    x--;
-                    break;
-                } else {
-                    for (int k = i - 1; k >= 0; k--) {
-                        if (cubes.get(k).isCoordinate(x, y)) {
-                            x--;
-                            break loop;
-                        }
-                    }
+            WinterCell cell = field[x][y];
+            if(!isCubeOnPlace(cell.getX(), cell.getY())) {
+                if (cell.getPurpose() == WinterCell.PurposeCell.EMPTY) {
+                    cube.saveNewInfo(x, y);
+                } else if (cell.getPurpose() == WinterCell.PurposeCell.WALL) {
+                    cube.move();
+                    cube.setDirection(null);
+                } else if (cell.getPurpose() == WinterCell.PurposeCell.ARROW) {
+                    cube.saveNewInfo(x, y);
+                    cube.move();
+                    cube.setDirection(cell.getDirection());
                 }
+            } else {
+                cube.move();
+                cube.setDirection(null);
             }
-            cube.down(x, y);
         }
-        checkWin();
     }
 
-    public void checkWin() {
+    private void moveR(WinterCube cube) {
+        if(cube.getY() == field.length-1) {
+            cube.move();
+            cube.setDirection(null);
+        } else {
+            int x = cube.getX();
+            int y = cube.getY() + 1;
+            WinterCell cell = field[x][y];
+            if(!isCubeOnPlace(cell.getX(), cell.getY())) {
+                if (cell.getPurpose() == WinterCell.PurposeCell.EMPTY) {
+                    cube.saveNewInfo(x, y);
+                } else if (cell.getPurpose() == WinterCell.PurposeCell.WALL) {
+                    cube.move();
+                    cube.setDirection(null);
+                } else if (cell.getPurpose() == WinterCell.PurposeCell.ARROW) {
+                    cube.saveNewInfo(x, y);
+                    cube.move();
+                    cube.setDirection(cell.getDirection());
+                }
+            } else {
+                cube.move();
+                cube.setDirection(null);
+            }
+        }
+    }
+
+    private void moveD(WinterCube cube) {
+        if(cube.getX() == field.length-1) {
+            cube.move();
+            cube.setDirection(null);
+        } else {
+            int x = cube.getX() + 1;
+            int y = cube.getY();
+            WinterCell cell = field[x][y];
+            if(!isCubeOnPlace(cell.getX(), cell.getY())) {
+                if (cell.getPurpose() == WinterCell.PurposeCell.EMPTY) {
+                    cube.saveNewInfo(x, y);
+                } else if (cell.getPurpose() == WinterCell.PurposeCell.WALL) {
+                    cube.move();
+                    cube.setDirection(null);
+                } else if (cell.getPurpose() == WinterCell.PurposeCell.ARROW) {
+                    cube.saveNewInfo(x, y);
+                    cube.move();
+                    cube.setDirection(cell.getDirection());
+                }
+            } else {
+                cube.move();
+                cube.setDirection(null);
+            }
+        }
+    }
+
+    private void moveL(WinterCube cube) {
+        if(cube.getY() == 0) {
+            cube.move();
+            cube.setDirection(null);
+        } else {
+            int x = cube.getX();
+            int y = cube.getY() - 1;
+            WinterCell cell = field[x][y];
+            if(!isCubeOnPlace(cell.getX(), cell.getY())) {
+                if (cell.getPurpose() == WinterCell.PurposeCell.EMPTY) {
+                    cube.saveNewInfo(x, y);
+                } else if (cell.getPurpose() == WinterCell.PurposeCell.WALL) {
+                    cube.move();
+                    cube.setDirection(null);
+                } else if (cell.getPurpose() == WinterCell.PurposeCell.ARROW) {
+                    cube.saveNewInfo(x, y);
+                    cube.move();
+                    cube.setDirection(cell.getDirection());
+                }
+            } else {
+                cube.move();
+                cube.setDirection(null);
+            }
+        }
+    }
+
+    private void checkWin() {
         boolean value = true;
         for (int i = 0; i < cubes.size(); i++) {
             WinterCube cube = cubes.get(i);
