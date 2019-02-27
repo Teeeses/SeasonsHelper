@@ -1,6 +1,7 @@
 package com.explead.seasonhelper.winter.logic;
 
 import com.explead.seasonhelper.common.logic.Cell;
+import com.explead.seasonhelper.common.logic.Direction;
 
 public class WinterCube extends Cell {
 
@@ -13,6 +14,8 @@ public class WinterCube extends Cell {
 
     private OnMoveListener onMoveListener;
     private WinterInsideCube insideCube;
+
+    private Direction direction;
 
     public WinterCube(int x, int y) {
         super(x, y);
@@ -58,5 +61,13 @@ public class WinterCube extends Cell {
 
     public void setOnMoveListener(OnMoveListener onMoveListener) {
         this.onMoveListener = onMoveListener;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 }

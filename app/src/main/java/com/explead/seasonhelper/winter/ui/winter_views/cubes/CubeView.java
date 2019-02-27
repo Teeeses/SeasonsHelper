@@ -1,5 +1,7 @@
 package com.explead.seasonhelper.winter.ui.winter_views.cubes;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -11,9 +13,12 @@ import com.explead.seasonhelper.common.beans.GetIds;
 import com.explead.seasonhelper.common.ui.CellView;
 import com.explead.seasonhelper.winter.logic.WinterCube;
 
+import java.util.ArrayList;
+
 public class CubeView extends CellView implements WinterCube.OnMoveListener {
 
     protected WinterCube cell;
+    private ArrayList<ValueAnimator> animationQueue = new ArrayList<>();
 
     public CubeView(Context context) {
         super(context);
@@ -94,9 +99,22 @@ public class CubeView extends CellView implements WinterCube.OnMoveListener {
                 }
             }
         });
+        valueAnimator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                animationQueue.remove(0);
+                if(animationQueue.size() != 0) {
+                    animationQueue.get(0).start();
+                }
+            }
+        });
+        valueAnimator.setDuration(400);
 
-        valueAnimator.setDuration(200);
-        valueAnimator.start();
+        if(animationQueue.size() == 0) {
+            valueAnimator.start();
+        }
+        animationQueue.add(valueAnimator);
     }
 
     public WinterCube getCell() {

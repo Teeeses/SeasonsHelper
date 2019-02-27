@@ -16,6 +16,7 @@ import com.explead.seasonhelper.common.app.App;
 import com.explead.seasonhelper.common.dialogs.DialogWinterHelp;
 import com.explead.seasonhelper.common.dialogs.DialogWinterWin;
 import com.explead.seasonhelper.common.logic.ContainerCells;
+import com.explead.seasonhelper.common.logic.Direction;
 import com.explead.seasonhelper.common.ui.fragments.GameFragment;
 import com.explead.seasonhelper.winter.logic.FieldWinter;
 import com.explead.seasonhelper.winter.ui.WinterGameBar;
@@ -78,22 +79,22 @@ public class WinterFragment extends GameFragment implements FieldWinter.OnContro
             new WinterMovementFinger.OnSideFingerMovementCallback() {
         @Override
         public void onUp() {
-            fieldWinter.moveUp();
+            fieldWinter.move(Direction.U);
         }
 
         @Override
         public void onDown() {
-            fieldWinter.moveDown();
+            fieldWinter.move(Direction.D);
         }
 
         @Override
         public void onRight() {
-            fieldWinter.moveRight();
+            fieldWinter.move(Direction.R);
         }
 
         @Override
         public void onLeft() {
-            fieldWinter.moveLeft();
+            fieldWinter.move(Direction.L);
         }
     };
 
