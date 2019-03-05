@@ -14,10 +14,12 @@ public class WinterCell extends Cell {
         EMPTY, WALL, ARROW
     }
 
-    //Если не null - значит на этой клетке стрелка
-    private Direction direction = null;
     private OnChangePurposeListener onChangePurposeListener;
     private PurposeCell purpose;
+
+
+    //Если не null - значит на этой клетке стрелка
+    private Direction direction = null;
 
     public WinterCell(int x, int y) {
         super(x, y);

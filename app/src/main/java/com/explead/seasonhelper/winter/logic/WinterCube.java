@@ -2,20 +2,19 @@ package com.explead.seasonhelper.winter.logic;
 
 import com.explead.seasonhelper.common.logic.Cell;
 import com.explead.seasonhelper.common.logic.Direction;
+import com.explead.seasonhelper.winter.interfaces.OnMoveCubeListener;
 
 public class WinterCube extends Cell {
 
-    public interface OnMoveListener {
-        void onUp(int x, int y);
-        void onDown(int x, int y);
-        void onRight(int x, int y);
-        void onLeft(int x, int y);
-    }
-
-    private OnMoveListener onMoveListener;
+    private OnMoveCubeListener onMoveListener;
     private WinterInsideCube insideCube;
 
     private Direction direction;
+    private Direction lastDirection;
+    private int lastX, lastY;
+
+    //Есть ли движение
+    private boolean MOVE = false;
 
     public WinterCube(int x, int y) {
         super(x, y);
@@ -35,20 +34,16 @@ public class WinterCube extends Cell {
         return insideCube;
     }
 
-    public void up(int x, int y) {
-        onMoveListener.onUp(x, y);
-    }
-
-    public void down(int x, int y) {
-        onMoveListener.onDown(x, y);
-    }
-
-    public void right(int x, int y) {
-        onMoveListener.onRight(x, y);
-    }
-
-    public void left(int x, int y) {
-        onMoveListener.onLeft(x, y);
+    public void move() {
+        if(lastDirection == Direction.U) {
+            onMoveListener.onUp(lastX, x);
+        } else if(lastDirection == Direction.R) {
+            onMoveListener.onRight(lastY, y);
+        } else if(lastDirection == Direction.D) {
+            onMoveListener.onDown(lastX, x);
+        } else if(lastDirection == Direction.L) {
+            onMoveListener.onLeft(lastY, y);
+        }
     }
 
     public boolean isTruePlace() {
@@ -59,8 +54,18 @@ public class WinterCube extends Cell {
         return this.x == x && this.y == y;
     }
 
-    public void setOnMoveListener(OnMoveListener onMoveListener) {
+    public void setOnMoveListener(OnMoveCubeListener onMoveListener) {
         this.onMoveListener = onMoveListener;
+    }
+
+    public void setLastCoordinate() {
+        lastX = x;
+        lastY = y;
+    }
+
+    public void setCoordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public void setDirection(Direction direction) {
@@ -69,5 +74,17 @@ public class WinterCube extends Cell {
 
     public Direction getDirection() {
         return direction;
+    }
+
+    public void setLastDirection() {
+        this.lastDirection = direction;
+    }
+
+    public void setMOVE(boolean MOVE) {
+        this.MOVE = MOVE;
+    }
+
+    public boolean getMOVE() {
+        return MOVE;
     }
 }

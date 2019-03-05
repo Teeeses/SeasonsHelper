@@ -18,6 +18,7 @@ import com.explead.seasonhelper.common.dialogs.DialogWinterWin;
 import com.explead.seasonhelper.common.logic.ContainerCells;
 import com.explead.seasonhelper.common.logic.Direction;
 import com.explead.seasonhelper.common.ui.fragments.GameFragment;
+import com.explead.seasonhelper.winter.interfaces.OnControllerListener;
 import com.explead.seasonhelper.winter.logic.FieldWinter;
 import com.explead.seasonhelper.winter.ui.WinterGameBar;
 import com.explead.seasonhelper.winter.ui.winter_views.FieldWinterView;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
  * Created by Александр on 09.07.2017.
  */
 
-public class WinterFragment extends GameFragment implements FieldWinter.OnControllerListener, WinterGameBar.OnMenuClickListener {
+public class WinterFragment extends GameFragment implements OnControllerListener, WinterGameBar.OnMenuClickListener {
 
     private FieldWinterView fieldView;
     private int level = 1;
