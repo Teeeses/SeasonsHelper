@@ -158,7 +158,7 @@ public class WinterLevelFragment extends Fragment implements WinterCreateFieldVi
         btnStartTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int[][] mass = winterCreateFieldView.getMassField();
+                char[][] mass = winterCreateFieldView.getMassField();
                 App.setWinterContainer(winterCreateFieldView.getContainer());
                 App.setWinterMass(mass);
                 activity.openGameActivity(Level.WINTER, (String)tvDirections.getTag());

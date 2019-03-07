@@ -27,13 +27,15 @@ public class WinterCell extends Cell {
 
     public void makeEmpty() {
         purpose = PurposeCell.EMPTY;
+        direction = null;
     }
 
     public void makeWall() {
         purpose = PurposeCell.WALL;
+        direction = null;
     }
 
-    public void makeArrow(int id) {
+    public void makeArrow(char id) {
         purpose = PurposeCell.ARROW;
         findDirection(id);
     }
@@ -45,22 +47,22 @@ public class WinterCell extends Cell {
         }
     }
 
-    public int getId() {
-        return purpose == PurposeCell.EMPTY ? 0 : 6;
+    public char getId() {
+        return purpose == PurposeCell.EMPTY ? 'O' : 'X';
     }
 
-    public void findDirection(int id) {
+    public void findDirection(char id) {
         switch (id) {
-            case 1:
+            case 'U':
                 direction = Direction.U;
                 break;
-            case 2:
+            case 'R':
                 direction = Direction.R;
                 break;
-            case 3:
+            case 'D':
                 direction = Direction.D;
                 break;
-            case 4:
+            case 'L':
                 direction = Direction.L;
                 break;
         }

@@ -16,18 +16,18 @@ public class FieldWinter {
 
     private OnControllerListener onControllerListener;
 
-    private static final int EMPTY_CELL = 0, WALL_CELL = 6;
+    private static final char EMPTY_CELL = 'O', WALL_CELL = 'X';
 
     private int level;
     private WinterCell[][] field;
     private ArrayList<WinterCube> cubes = new ArrayList<>();
 
-    public FieldWinter(int[][] mass, ArrayList<ContainerCells> cubes) {
+    public FieldWinter(char[][] mass, ArrayList<ContainerCells> cubes) {
         createField(mass);
         addActionCellsOnField(cubes);
     }
 
-    private void createField(int[][] mass) {
+    private void createField(char[][] mass) {
         field = new WinterCell[mass.length][mass.length];
         for(int i = 0; i < mass.length; i++) {
             for(int j = 0; j < mass.length; j++) {

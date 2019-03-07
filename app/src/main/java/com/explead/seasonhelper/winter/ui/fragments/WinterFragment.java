@@ -39,7 +39,7 @@ public class WinterFragment extends GameFragment implements OnControllerListener
 
     private SoundPool soundPool;
 
-    private static int[][] winterMass;
+    private static char[][] winterMass;
     private static  ArrayList<ContainerCells> winterContainer;
 
     @Override
@@ -145,7 +145,7 @@ public class WinterFragment extends GameFragment implements OnControllerListener
         }, 500);
     }
 
-    public void startGame(int[][] mass, ArrayList<ContainerCells> cubes) {
+    public void startGame(char[][] mass, ArrayList<ContainerCells> cubes) {
         bar.setNumberLevel(level);
 
         fieldWinter = new FieldWinter(mass, cubes);

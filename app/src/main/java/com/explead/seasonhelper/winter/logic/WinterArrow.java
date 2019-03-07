@@ -38,4 +38,8 @@ public class WinterArrow extends Cell {
     public int getId() {
         return id;
     }
+
+    public char gtNameId() {
+        return direction.name().charAt(0);
+    }
 }

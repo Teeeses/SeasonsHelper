@@ -131,6 +131,7 @@ public class WinterCreateFieldView extends RelativeLayout {
         winterArrowView.create(sizeCell, arrow);
         arrows.add(winterArrowView);
         this.addView(winterArrowView);
+        field[x][y].makeArrow(arrow.getDirection().name().charAt(0));
     }
 
     private CubeView getCubeViewFromArray(Cell.ColorCube color) {
@@ -170,15 +171,16 @@ public class WinterCreateFieldView extends RelativeLayout {
         }
     }
 
-    public int[][] getMassField() {
-        int[][] mass = new int[field.length][field.length];
+    public char[][] getMassField() {
+        char[][] mass = new char[field.length][field.length];
         for(int i = 0; i < field.length; i++) {
             for(int j = 0; j < field.length; j++) {
                 mass[i][j] = field[i][j].getId();
             }
         }
         for(WinterArrowView arrowView: arrows) {
-            mass[arrowView.getCell().getX()][arrowView.getCell().getY()] = arrowView.getCell().getId();
+            WinterArrow cell = arrowView.getCell();
+            mass[cell.getX()][cell.getY()] = cell.gtNameId();
         }
         return mass;
     }

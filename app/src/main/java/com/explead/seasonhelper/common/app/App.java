@@ -16,7 +16,7 @@ public class App extends Application{
     private static float widthScreen;
     private static float heightScreen;
 
-    private static int[][] winterMass;
+    private static char[][] winterMass;
     private static  ArrayList<ContainerCells> winterContainer;
 
     @Override
@@ -32,11 +32,11 @@ public class App extends Application{
         App.winterContainer = winterContainer;
     }
 
-    public static void setWinterMass(int[][] winterMass) {
+    public static void setWinterMass(char[][] winterMass) {
         App.winterMass = winterMass;
     }
 
-    public static int[][] getWinterMass() {
+    public static char[][] getWinterMass() {
         return winterMass;
     }
 
