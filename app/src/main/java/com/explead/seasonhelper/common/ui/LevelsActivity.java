@@ -1,6 +1,8 @@
 package com.explead.seasonhelper.common.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -29,7 +31,7 @@ public class LevelsActivity extends BaseActivity {
         App.setWidthScreen(displaymetrics.widthPixels);
         App.setHeightScreen(displaymetrics.heightPixels);
 
-        viewPager = (ScrollerViewPager) findViewById(R.id.view_pager);
+        viewPager = findViewById(R.id.view_pager);
 
         adapter = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
@@ -43,4 +45,26 @@ public class LevelsActivity extends BaseActivity {
         intent.putExtra("directions", directions);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+        dialog.setMessage("Exit?")
+            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                }
+            })
+            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            })
+            .show();
+    }
+
 }

@@ -2,6 +2,9 @@ package com.explead.seasonhelper.winter.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -223,6 +226,7 @@ public class WinterLevelFragment extends Fragment implements WinterCreateFieldVi
                     seekBarContainers.setMax(result.size()-1);
                     seekBarContainers.setProgress(result.size()-1);
                     setGenerateContainer(result.get(seekBarContainers.getProgress()));
+
                 }
 
                 @Override
